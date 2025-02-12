@@ -197,7 +197,7 @@ public class CreateChangelogViewProcedure extends BaseProcedure {
     }
 
     Column[] repartitionSpec =
-        Arrays.stream(df.columns()).filter(columnsToKeep).map(df::col).toArray(Column[]::new);
+        Arrays.stream(df.columns()).filter(columnsToKeep).map(name -> df.col("`" + name + "`")).toArray(Column[]::new);
     return applyCarryoverRemoveIterator(df, repartitionSpec, netChanges);
   }
 
